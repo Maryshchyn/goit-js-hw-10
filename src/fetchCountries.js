@@ -1,4 +1,4 @@
-export function fetchCountries(name) {
+export  function fetchCountries(name) {
     fetch('https://restcountries.com/v3.1/all')
         .then(name => {
     
@@ -6,5 +6,8 @@ export function fetchCountries(name) {
 }).then(countris => {
     console.log(countris)
 })
+        .catch(error => {
+        console.log(error)
+    })
 };
 
