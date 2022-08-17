@@ -19,7 +19,7 @@ function resultFilter (name) {
     fetch('https://restcountries.com/v2/all?fields=name.official,capital,population,flags.svg,languages')
         .then(name => {
             const newNames = ['name.official', 'capital', 'population', 'flags.svg', 'languages'];
-            const markup = newNames.map((names) => `<li class="list-item">${{names}}</li>`).join("");
+            const markup = newNames.map((names) => `<li class="list-item">${names}</li>`).join("");
             countryList.insertAdjacentHTML("beforeend", markup);
             console.log(markup)
             
@@ -28,7 +28,7 @@ function resultFilter (name) {
     console.log(countrisFilter)
 })
 };
-// resultFilter()
+resultFilter()
 fetchCountries()
 
 
