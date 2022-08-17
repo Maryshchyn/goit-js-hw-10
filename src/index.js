@@ -1,6 +1,6 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
-
+import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
 
 import {fetchCountries} from './fetchCountries';
@@ -16,7 +16,7 @@ searchBox.addEventListener('input', fetchCountries);
 
 
 function resultFilter (name) {
-    fetch('https://restcountries.com/v2/all?fields=name.official,capital,population,flags.svg,languages')
+    fetch('https://restcountries.com/v2/all?fields=name.official,capital,population,flags.svg,[languages]')
         .then(name => {
             const newNames = ['name.official', 'capital', 'population', 'flags.svg', 'languages'];
             const markup = newNames.map((names) => `<li class="list-item">${names}</li>`).join("");
