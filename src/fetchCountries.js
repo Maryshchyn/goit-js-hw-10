@@ -1,13 +1,13 @@
-export  function fetchCountries(name) {
-    fetch('https://restcountries.com/v3.1/all')
-        .then(name => {
+// export  function fetchCountries(name) {
+//     fetch('https://restcountries.com/v3.1/all')
+//         .then(name => {
     
-    return name.json()
-}).then(countris => {
-    console.log(countris)
-})
-        .catch(error => {
-        console.log(error)
-    })
-};
+//     return name.json()
+// }).then(countris => {
+//     console.log(countris)
+// })
+//         .catch(error => {
+//         console.log(error)
+//     })
+// };
 
