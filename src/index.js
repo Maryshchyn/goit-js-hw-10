@@ -25,7 +25,7 @@ function paisesCreate({ name, capital, population, flags, languages }) {
          <li class="list-item">${flags}</li>
          <li class="list-item">${languages}</li>`
     
-   
+   countryList.insertAdjacentHTML("beforeend", markup)
     };
 
 function fetchCountries(name) {
