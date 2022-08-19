@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
 
-import { fetchCountries } from './fetchCountries';
+import API from './fetchCountries';
 import { paisesCreate } from './paises';
 
 
@@ -20,7 +20,7 @@ function onInput(e) {
     const searchQuery = input.value.trim();
     console.log(searchQuery)
 };
- fetchCountries(searchQuery)
+ API.fetchCountries(searchQuery)
     .then(renderCountry)
     .catch(onFeachError)
     .finally(()=> input.reset());
