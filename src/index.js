@@ -36,11 +36,14 @@ function onFeachError(data){
       Notify.info('Too many matches found. Please enter a more specific name.');
       
   } else if (data.length === 0) {
-    Notify.failure("Oops, there is no country with that name");
+    
+    Notiflix.Notify.failure('Oops, there is no country with that name');
   } else if (data.length >= 2 && data.length <= 10) {
-       Notify.info('render list');
+    
+    Notiflix.Notify.info('render list');
   } else if (data.length === 1) {
-       Notify.info('render 1 country');
+    Notiflix.Notify.info('render 1 country');
+       
   }
 }
 
