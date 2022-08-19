@@ -1,13 +1,8 @@
-// export  function fetchCountries(name) {
-//     fetch('https://restcountries.com/v3.1/all')
-//         .then(name => {
-    
-//     return name.json()
-// }).then(countris => {
-//     console.log(countris)
-// })
-//         .catch(error => {
-//         console.log(error)
-//     })
-// };
+export  function fetchCountries(name) {
+    const url = `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`;
+
+    return fetch(url).then(response => {
+        return response.json()
+    });
+};
 
