@@ -14,7 +14,7 @@ const countryInfo = document.querySelector('.country-info');
 
 
 searchBox.addEventListener('input', onInput);
-
+let searchQuery = '';
 function onInput(e) {
     const input = e.currentTarget;
     const searchQuery = input.value.trim();
