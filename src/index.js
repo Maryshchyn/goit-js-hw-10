@@ -1,9 +1,9 @@
 import './css/styles.css';
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
 
-import API from './fetchCountries';
+import fetchCountries from './fetchCountries';
 import { paisesCreate } from './paises';
 
 
@@ -20,10 +20,14 @@ function onInput(e) {
     const searchQuery = input.value.trim();
     console.log(searchQuery)
 };
- API.fetchCountries(searchQuery)
-    .then(renderCountry)
+     fetchCountries(searchQuery)
+    // .then(renderCountry)
+       .then(renderCountry => {
+         console.log(renderCountry)
+       })
+       
     .catch(onFeachError)
-    .finally(()=> input.reset());
+    // .finally(()=> input.reset());
 
 function renderCountry(country) {
     const markup = paisesCreate(country);
@@ -37,12 +41,12 @@ function onFeachError(data){
       
   } else if (data.length === 0) {
     
-    Notiflix.Notify.failure('Oops, there is no country with that name');
+    Notify.failure('Oops, there is no country with that name');
   } else if (data.length >= 2 && data.length <= 10) {
     
-    Notiflix.Notify.info('render list');
+    Notify.info('render list');
   } else if (data.length === 1) {
-    Notiflix.Notify.info('render 1 country');
+    Notify.info('render 1 country');
        
   }
 }
