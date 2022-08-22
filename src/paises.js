@@ -27,7 +27,7 @@ function createMarkUpForCountry({
 
 function createMarkupForList({ name: { official }, flags: { svg } }) {
   return ` <li class="country-list__item">
-  <img src="${svg}" alt="flag" width="40" height="40" class="country-flag" />
+  <img src="${svg}" alt="flag" width="50" height="50" class="country-flag" />
   <span class="country-name">${official}</span>
 </li>`;
 }
