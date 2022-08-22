@@ -4,70 +4,49 @@ import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
 
 import fetchCountries from './fetchCountries';
-import { paisesCreate } from './paises';
+import { createMarkUpForCountry, createMarkupForList } from './paises';
 
-
-
-const searchBox = document.querySelector('#search-box');
+const inputRef = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
+inputRef.addEventListener('input', debounce(onTapQuery, DEBOUNCE_DELAY));
 
-searchBox.addEventListener('input', onInput);
-let searchQuery = '';
-function onInput(e) {
-    const input = e.currentTarget;
-    const searchQuery = input.value.trim();
-    console.log(searchQuery)
-};
-     fetchCountries(searchQuery)
-    // .then(renderCountry)
-       .then(renderCountry => {
-         console.log(renderCountry)
-       })
-       
-    .catch(onFeachError)
-    // .finally(()=> input.reset());
+function onTapQuery(e) {
+  e.preventDefault();
 
-function renderCountry(country) {
-    const markup = paisesCreate(country);
-            countryList.innerHTML = markup;
-}
-      
+  clearMarkUp();
 
-function onFeachError(data){
-  if (data.length > 10) {
-      Notify.info('Too many matches found. Please enter a more specific name.');
-      
-  } else if (data.length === 0) {
-    
-    Notify.failure('Oops, there is no country with that name');
-  } else if (data.length >= 2 && data.length <= 10) {
-    
-    Notify.info('render list');
-  } else if (data.length === 1) {
-    Notify.info('render 1 country');
-       
+  const searchQuery = e.target.value.trim();
+
+  if (searchQuery) {
+    fetchCountries(searchQuery).then(renderCountry);
   }
 }
 
+function renderCountry(countries) {
+  if (countries.length > 10) {
+    return Notify.info(
+      'Too many matches found. Please enter a more specific name.'
+    );
+  }
 
+  if (countries.length > 1 && countries.length < 10) {
+    return countryList.insertAdjacentHTML(
+      'beforeend',
+      countries.map(createMarkupForList).join('')
+    );
+  }
 
+  if (countries.length === 1) {
+    return countryInfo.insertAdjacentHTML(
+      'beforeend',
+      countries.map(createMarkUpForCountry).join('')
+    );
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function clearMarkUp() {
+  countryInfo.innerHTML = '';
+  countryList.innerHTML = '';
+}
